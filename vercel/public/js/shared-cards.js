@@ -37,7 +37,7 @@
     [TERMS.targeting]: '효과가 아군/적군/특정 유닛을 대상으로 지정한다.',
     [TERMS.pressure]: '적 유닛이나 에이전트에게 직접 피해를 준다.',
     [TERMS.equip]: '아군 유닛에 부착되어 능력치를 강화한다.',
-    [TERMS.guard]: '상대 필드에 가드 유닛이 있으면 에이전트를 직접 공격할 수 없다.'
+    [TERMS.guard]: '상대 필드에 가드 유닛이 있으면 본체 공격할 수 없다.'
   };
 
   const ACTION_KEYWORD = {

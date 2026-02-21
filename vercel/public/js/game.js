@@ -163,7 +163,7 @@
     }
     if (/attacked agent/i.test(normalized)) {
       const parts = normalized.split(' ');
-      return `${actorLabel(parts[0])} 님 · 에이전트 공격`;
+      return `${actorLabel(parts[0])} 님 · 본체 공격`;
     }
     if (/attacked/i.test(normalized)) {
       const parts = normalized.split(' ');
