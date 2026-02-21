@@ -34,7 +34,7 @@
     [TERMS.heal]: '유닛 체력을 회복한다.',
     [TERMS.overcharge]: '일시적으로 마나를 획득한다.',
     [TERMS.chain]: '스택에 올린 뒤 스택 해결 시점에 해결된다.',
-    [TERMS.targeting]: '효과가 아군/적군/특정 유닛을 대상으로 지정한다.',
+    [TERMS.targeting]: '아군/적군 유닛 중 대상을 정해 적용한다.',
     [TERMS.pressure]: '적 유닛이나 에이전트에게 직접 피해를 준다.',
     [TERMS.equip]: '아군 유닛에 부착되어 능력치를 강화한다.',
     [TERMS.guard]: '상대 필드에 수호 유닛이 있으면 본체 공격할 수 없다.'
