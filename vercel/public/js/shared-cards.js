@@ -378,10 +378,10 @@
         if (f.element) chunks.push(`${f.element}`);
         if (f.type) chunks.push(`${toUnitLabel(f.type)}`);
         const label = chunks.length ? chunks.join(' · ') : '카드';
-        return `${TERMS.search}: 덱에서 ${label} ${count}장을 찾아 손패에 넣고 덱을 섞어요`;
+        return `${TERMS.search}: 덱에서 ${label} ${count}장을 찾아 손패에 넣고 덱을 섞는다`;
       }
       case 'recruit_from_deck':
-        return `${TERMS.recruit}: 덱에서 유닛 ${count}장을 곧바로 ${TERMS.recruit}하고 덱을 섞어요`;
+        return `${TERMS.recruit}: 덱에서 유닛 ${count}장을 곧바로 ${TERMS.recruit}하고 덱을 섞는다`;
       case 'gain_mana':
         return `${TERMS.overcharge}: 즉시 마나 ${value || 0} 획득`;
       case 'push_stack': {
@@ -403,7 +403,7 @@
         return `${TERMS.equip}: 아군 유닛에 ${TERMS.equip}해 공격 ${atk >= 0 ? '+' : ''}${atk}, 체력 ${hp >= 0 ? '+' : ''}${hp}`;
       }
       default:
-        return '효과가 적용돼요';
+        return '효과 적용';
     }
   }
 
@@ -413,7 +413,7 @@
     if (def.type === 'monster') {
       const guardText = def.guard ? ` <${TERMS.guard}>.` : '';
       const head = `<${TERMS.deploy}: {${def.cost}}> ${def.atk}/${def.hp} ${def.name}.${guardText}`;
-      if (!effects.length) return `${head} 기본 유닛이에요.`;
+      if (!effects.length) return `${head} 기본 유닛이다.`;
       const tails = effects.map((e) => `${timingIntro(def, e)} ${conditionPhrase(e?.condition)} ${actionSentence(def, e)}.`.replace(/\s+/g, ' ').trim());
       return `${head} ${tails.join(' ')}`.trim();
     }
@@ -423,7 +423,7 @@
       : (def.spellKind === 'equip'
         ? `<${TERMS.equip}: {${def.cost}}>`
         : `<${TERMS.active}: {${def.cost}}>`);
-    if (!effects.length) return `${spellHead} 효과가 없어요.`;
+    if (!effects.length) return `${spellHead} 효과 없음.`;
 
     const sentences = effects.map((e) => `${conditionPhrase(e?.condition)} ${actionSentence(def, e)}.`.replace(/\s+/g, ' ').trim());
     return `${spellHead} ${sentences.join(' ')}`.trim();

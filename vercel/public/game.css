@@ -395,9 +395,9 @@ body {
 }
 
 .card-mini__effect {
-    font-size: 10px;
-    line-height: 1.2;
-    color: rgba(220, 230, 255, 0.86);
+    font-size: var(--fs-body);
+    line-height: 1.4;
+    color: var(--c-text);
     display: -webkit-box;
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
@@ -560,8 +560,9 @@ body {
 
 .card-overlay__effect {
     margin-top: 8px;
-    font-size: 13px;
-    line-height: 1.45;
+    font-size: var(--fs-body);
+    line-height: 1.4;
+    color: var(--c-text);
     white-space: pre-wrap;
 }
 
