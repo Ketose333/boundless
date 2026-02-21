@@ -1,0 +1,56 @@
+/* palette.css — unified blue accent system */
+:root {
+  /* core */
+  --p-bg-900: #050916;
+  --p-bg-950: #030712;
+  --p-bg-980: #02040d;
+
+  --p-text-100: #f7faff;
+  --p-text-200: #e6eeff;
+
+  /* blue family accents (violet merged) */
+  --p-accent-blue: #3d7bff;
+  --p-accent-blue-soft: #75b8ff;
+  --p-accent-blue-strong: #2b5fff;
+  --p-accent-mint: #8cf1e0;
+  --p-accent-warn: #ffd46a;
+
+  /* surfaces */
+  --c-bg-900: var(--p-bg-900);
+  --c-bg-950: var(--p-bg-950);
+  --c-bg-980: var(--p-bg-980);
+
+  --c-surface-900: rgba(11, 22, 56, 0.76);
+  --c-surface-920: rgba(9, 18, 48, 0.88);
+  --c-surface-940: rgba(8, 14, 36, 0.84);
+  --c-surface-960: rgba(7, 12, 30, 0.62);
+
+  --c-text: var(--p-text-200);
+  --c-text-strong: var(--p-text-100);
+  --c-text-soft: rgba(198, 210, 242, 0.84);
+  --c-muted: rgba(182, 198, 235, 0.72);
+
+  /* borders */
+  --c-line-1: rgba(102, 152, 255, 0.28);
+  --c-line-2: rgba(133, 175, 255, 0.22);
+  --c-line-soft: rgba(255, 255, 255, 0.1);
+  --c-border-strong: rgba(44, 68, 132, 0.96);
+  --c-ink-border: rgba(8, 14, 34, 0.98);
+
+  /* semantic accents */
+  --c-accent-blue: var(--p-accent-blue);
+  --c-accent-cyan: var(--p-accent-blue-soft);
+  --c-accent-violet: var(--p-accent-blue-strong);
+  --c-accent-mint: var(--p-accent-mint);
+  --c-accent-warn: var(--p-accent-warn);
+
+  /* glow */
+  --c-glow-blue: rgba(74, 125, 255, 0.36);
+  --c-glow-violet: rgba(74, 125, 255, 0.24);
+  --c-glow-a: rgba(76, 130, 255, 0.22);
+  --c-glow-b: rgba(102, 176, 255, 0.16);
+
+  /* buttons */
+  --c-btn-accent-bg: linear-gradient(180deg, var(--p-accent-blue-soft) 0%, var(--p-accent-blue-strong) 100%);
+  --c-btn-accent-fg: #f3f7ff;
+}

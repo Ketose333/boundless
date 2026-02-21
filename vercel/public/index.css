@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;600&display=swap');
+
+:root {
+  --index-bg: #07070b;
+  --index-text: #f5f6fb;
+  --index-muted: #9ea3b8;
+  --index-accent: #90f0ff;
+  --index-accent-2: #b28cff;
+  --index-shadow-soft: 0 10px 30px rgba(0, 0, 0, .45);
+  --index-easing: cubic-bezier(.2, .85, .2, 1);
+  --index-fast: 260ms;
+  --index-normal: 640ms;
+}
+
+body.bp-index {
+  --grid-size: 32px;
+  --grid-line: rgba(255, 255, 255, 0.022);
+  overflow: hidden;
+  color: var(--index-text);
+  font-family: "IBM Plex Sans KR", system-ui, sans-serif;
+  background:
+    radial-gradient(circle at 18% 14%, #1a1632 0%, transparent 38%),
+    radial-gradient(circle at 82% 76%, #112233 0%, transparent 40%),
+    var(--index-bg);
+}
+
+.bp-index .splash {
+  background:
+    repeating-linear-gradient(0deg, var(--grid-line) 0 1px, transparent 1px var(--grid-size)),
+    repeating-linear-gradient(90deg, var(--grid-line) 0 1px, transparent 1px var(--grid-size));
+  transition: opacity var(--index-fast) ease;
+}
+
+.bp-index .stage {
+  transform: translateY(8px);
+  animation: bp-stage-in var(--index-normal) var(--index-easing) both;
+}
+
+.bp-index .logo {
+  text-shadow: var(--index-shadow-soft);
+}
+
+.bp-index .logo span:nth-child(1) {
+  animation: bp-line-reveal var(--index-normal) var(--index-easing) both;
+}
+
+.bp-index .logo span:nth-child(2) {
+  animation: bp-line-reveal var(--index-normal) var(--index-easing) 90ms both;
+}
+
+.bp-index .signature {
+  color: var(--index-muted);
+  animation: bp-sig-in var(--index-normal) var(--index-easing) 180ms both;
+}
+
+.bp-index .signature::before {
+  background: linear-gradient(90deg, var(--index-accent), var(--index-accent-2));
+  box-shadow: 0 0 14px rgba(144, 240, 255, .6);
+}
+
+.bp-index .scan {
+  animation: bp-scan-sweep 1700ms var(--index-easing) 240ms both;
+}

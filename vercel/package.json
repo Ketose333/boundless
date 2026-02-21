@@ -1,0 +1,16 @@
+{
+  "name": "boundless-protocol-vercel",
+  "private": true,
+  "version": "1.0.0",
+  "description": "BOUNDLESS PROTOCOL Alpha 1.0.0 Vercel deployment root",
+  "license": "UNLICENSED",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "deploy": "vercel --prod"
+  },
+  "dependencies": {
+    "@vercel/kv": "^1.0.1"
+  }
+}
