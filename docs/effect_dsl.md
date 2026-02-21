@@ -13,7 +13,7 @@
     {
       "timing": "on_play",
       "condition": { "phase": "main" },
-      "action": { "kind": "damage_agent", "target": "opponent", "value": 2 }
+      "action": { "kind": "deal_damage_to_agent", "target": "opponent", "value": 2 }
     }
   ]
 }
@@ -55,18 +55,18 @@
 
 ## 4) action 집합 (v0.1)
 
-- `damage_agent` : 에이전트에게 피해
-- `damage_unit` : 유닛에게 피해
+- `deal_damage_to_agent` : 에이전트에게 피해
+- `deal_damage_to_unit` : 유닛에게 피해
 - `heal_unit` : 유닛 회복
 - `draw` : 드로우
 - `gain_mana` : 마나 증가
-- `search_to_hand` : 덱에서 탐색 후 손패
-- `recruit_from_deck` : 덱에서 유닛 전개
+- `search_deck_to_hand` : 덱에서 탐색 후 손패
+- `deploy_from_deck` : 덱에서 유닛 전개
 - `apply_status` : 상태 부여(버프/디버프)
 
 예시:
 ```json
-{ "kind": "search_to_hand", "filter": { "type": "spell" }, "count": 1 }
+{ "kind": "search_deck_to_hand", "filter": { "type": "spell" }, "count": 1 }
 ```
 
 ---

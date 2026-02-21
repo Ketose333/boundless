@@ -8,19 +8,19 @@
   // 키워드/용어 단일 소스
   const TERMS = {
     deploy: '전개',
-    active: '기동',
+    active: '사용',
     continuous: '지속',
-    forced: '강제',
+    forced: '자동',
     optional: '선택',
-    search: '탐색',
-    recruit: '징집',
+    search: '덱 탐색',
+    recruit: '즉시 전개',
     heal: '치유',
-    overcharge: '과충전',
+    overcharge: '마나 충전',
     chain: '연쇄',
-    targeting: '대상',
-    pressure: '제압',
+    targeting: '대상 지정',
+    pressure: '피해',
     equip: '장착',
-    guard: '가드'
+    guard: '수호'
   };
 
   const KEYWORD_TEXT = {
@@ -33,27 +33,27 @@
     [TERMS.recruit]: '덱에서 유닛을 즉시 필드로 전개한다.',
     [TERMS.heal]: '유닛 체력을 회복한다.',
     [TERMS.overcharge]: '일시적으로 마나를 획득한다.',
-    [TERMS.chain]: '스택에 올린 뒤 resolve_stack 시점에 해결된다.',
+    [TERMS.chain]: '스택에 올린 뒤 스택 해결 시점에 해결된다.',
     [TERMS.targeting]: '효과가 아군/적군/특정 유닛을 대상으로 지정한다.',
     [TERMS.pressure]: '적 유닛이나 에이전트에게 직접 피해를 준다.',
     [TERMS.equip]: '아군 유닛에 부착되어 능력치를 강화한다.',
-    [TERMS.guard]: '상대 필드에 가드 유닛이 있으면 본체 공격할 수 없다.'
+    [TERMS.guard]: '상대 필드에 수호 유닛이 있으면 본체 공격할 수 없다.'
   };
 
   const ACTION_KEYWORD = {
-    heal_self_unit: TERMS.heal,
-    search_to_hand: TERMS.search,
-    recruit_from_deck: TERMS.recruit,
+    heal_self: TERMS.heal,
+    search_deck_to_hand: TERMS.search,
+    deploy_from_deck: TERMS.recruit,
     gain_mana: TERMS.overcharge,
-    push_stack: TERMS.chain,
-    damage_unit: TERMS.pressure,
+    enqueue_stack: TERMS.chain,
+    deal_damage_to_unit: TERMS.pressure,
     heal_unit: TERMS.targeting,
-    damage_agent: TERMS.pressure,
-    attach_equip: TERMS.equip
+    deal_damage_to_agent: TERMS.pressure,
+    attach_equipment: TERMS.equip
   };
 
   const STACK_EFFECT_DEFAULTS = {
-    direct_hit: { kind: 'damage_agent', target: 'opponent', value: 3 }
+    direct_hit: { kind: 'deal_damage_to_agent', target: 'opponent', value: 3 }
   };
 
   const CARD_RACES = ['인간족', '기계족', '야전족', '술법'];
@@ -101,7 +101,7 @@
       atk: 1,
       hp: 2,
       effects: [
-        { timing: 'on_deploy', cost: { mana: 1 }, action: { kind: 'heal_self_unit', value: 1 } }
+        { timing: 'on_deploy', cost: { mana: 1 }, action: { kind: 'heal_self', value: 1 } }
       ]
     },
     sharpshooter: {
@@ -111,7 +111,7 @@
       atk: 2,
       hp: 2,
       effects: [
-        { timing: 'on_deploy', cost: { mana: 1 }, action: { kind: 'search_to_hand', filter: { type: 'spell' }, count: 1, label: 'spell' } }
+        { timing: 'on_deploy', cost: { mana: 1 }, action: { kind: 'search_deck_to_hand', filter: { type: 'spell' }, count: 1, label: 'spell' } }
       ]
     },
     heavy_cavalry: { name: '중장기병', type: 'monster', cost: 3, atk: 2, hp: 4, effects: [] },
@@ -124,7 +124,7 @@
       spellKind: 'normal',
       cost: 2,
       effects: [
-        { timing: 'on_play', action: { kind: 'push_stack', effectKey: 'direct_hit' } }
+        { timing: 'on_play', action: { kind: 'enqueue_stack', effectKey: 'direct_hit' } }
       ]
     },
     tactical_order: {
@@ -133,7 +133,7 @@
       spellKind: 'normal',
       cost: 3,
       effects: [
-        { timing: 'on_play', action: { kind: 'search_to_hand', filter: { type: 'spell' }, count: 1, label: 'spell' } }
+        { timing: 'on_play', action: { kind: 'search_deck_to_hand', filter: { type: 'spell' }, count: 1, label: 'spell' } }
       ]
     },
     overload: {
@@ -151,7 +151,7 @@
       spellKind: 'continuous',
       cost: 1,
       effects: [
-        { timing: 'on_play', action: { kind: 'recruit_from_deck', count: 1 } }
+        { timing: 'on_play', action: { kind: 'deploy_from_deck', count: 1 } }
       ]
     },
     battlefield_analysis: {
@@ -160,8 +160,8 @@
       spellKind: 'continuous',
       cost: 2,
       effects: [
-        { timing: 'on_play', action: { kind: 'search_to_hand', filter: { type: 'monster' }, count: 1, label: 'monster' } },
-        { timing: 'on_play', action: { kind: 'recruit_from_deck', count: 1 } }
+        { timing: 'on_play', action: { kind: 'search_deck_to_hand', filter: { type: 'monster' }, count: 1, label: 'monster' } },
+        { timing: 'on_play', action: { kind: 'deploy_from_deck', count: 1 } }
       ]
     }
 
@@ -182,7 +182,7 @@
       atk: 3,
       hp: 2,
       effects: [
-        { timing: 'on_deploy', action: { kind: 'damage_unit', target: 'enemy_front', value: 1 } }
+        { timing: 'on_deploy', action: { kind: 'deal_damage_to_unit', target: 'enemy_front', value: 1 } }
       ]
     },
     vanguard_captain: {
@@ -193,7 +193,7 @@
       hp: 4,
       guard: true,
       effects: [
-        { timing: 'on_deploy', action: { kind: 'search_to_hand', filter: { type: 'monster' }, count: 1, label: 'monster' } }
+        { timing: 'on_deploy', action: { kind: 'search_deck_to_hand', filter: { type: 'monster' }, count: 1, label: 'monster' } }
       ]
     },
 
@@ -203,7 +203,7 @@
       spellKind: 'normal',
       cost: 2,
       effects: [
-        { timing: 'on_play', action: { kind: 'damage_unit', target: 'enemy_front', value: 2 } }
+        { timing: 'on_play', action: { kind: 'deal_damage_to_unit', target: 'enemy_front', value: 2 } }
       ]
     },
     emergency_repair: {
@@ -221,7 +221,7 @@
       spellKind: 'normal',
       cost: 3,
       effects: [
-        { timing: 'on_play', action: { kind: 'push_stack', effectKey: 'chain_burst', stackAction: { kind: 'damage_agent', target: 'opponent', value: 3 } } }
+        { timing: 'on_play', action: { kind: 'enqueue_stack', effectKey: 'chain_burst', stackAction: { kind: 'deal_damage_to_agent', target: 'opponent', value: 3 } } }
       ]
     },
     reserve_call: {
@@ -230,8 +230,8 @@
       spellKind: 'continuous',
       cost: 2,
       effects: [
-        { timing: 'on_play', action: { kind: 'recruit_from_deck', count: 1 } },
-        { timing: 'on_play', mode: 'optional', cost: { mana: 1 }, action: { kind: 'search_to_hand', filter: { type: 'monster' }, count: 1, label: 'monster' } }
+        { timing: 'on_play', action: { kind: 'deploy_from_deck', count: 1 } },
+        { timing: 'on_play', mode: 'optional', cost: { mana: 1 }, action: { kind: 'search_deck_to_hand', filter: { type: 'monster' }, count: 1, label: 'monster' } }
       ]
     },
     reinforced_blade: {
@@ -240,7 +240,7 @@
       spellKind: 'equip',
       cost: 2,
       effects: [
-        { timing: 'on_play', action: { kind: 'attach_equip', target: 'ally_front', bonus: { atk: 2, hp: 0 } } }
+        { timing: 'on_play', action: { kind: 'attach_equipment', target: 'ally_front', bonus: { atk: 2, hp: 0 } } }
       ]
     },
     guardian_plating: {
@@ -249,7 +249,7 @@
       spellKind: 'equip',
       cost: 2,
       effects: [
-        { timing: 'on_play', action: { kind: 'attach_equip', target: 'ally_front', bonus: { atk: 0, hp: 2 } } }
+        { timing: 'on_play', action: { kind: 'attach_equipment', target: 'ally_front', bonus: { atk: 0, hp: 2 } } }
       ]
     },
     lineage_muster: {
@@ -258,8 +258,8 @@
       spellKind: 'continuous',
       cost: 2,
       effects: [
-        { timing: 'on_play', condition: { actorBoardHas: { race: '인간족', min: 1 } }, action: { kind: 'search_to_hand', filter: { race: '인간족', type: 'monster' }, count: 1, label: 'race' } },
-        { timing: 'on_play', condition: { actorBoardHas: { race: '인간족', min: 2 } }, action: { kind: 'recruit_from_deck', count: 1 } }
+        { timing: 'on_play', condition: { actorBoardHas: { race: '인간족', min: 1 } }, action: { kind: 'search_deck_to_hand', filter: { race: '인간족', type: 'monster' }, count: 1, label: 'race' } },
+        { timing: 'on_play', condition: { actorBoardHas: { race: '인간족', min: 2 } }, action: { kind: 'deploy_from_deck', count: 1 } }
       ]
     },
     alchemist_rite: {
@@ -268,7 +268,7 @@
       spellKind: 'normal',
       cost: 2,
       effects: [
-        { timing: 'on_play', condition: { actorBoardHas: { theme: '연금', min: 1 } }, action: { kind: 'search_to_hand', filter: { theme: '연금' }, count: 1, label: 'theme' } },
+        { timing: 'on_play', condition: { actorBoardHas: { theme: '연금', min: 1 } }, action: { kind: 'search_deck_to_hand', filter: { theme: '연금' }, count: 1, label: 'theme' } },
         { timing: 'on_play', condition: { actorBoardHas: { theme: '연금', min: 2 } }, action: { kind: 'heal_unit', target: 'ally_front', value: 2 } }
       ]
     },
@@ -278,8 +278,8 @@
       spellKind: 'normal',
       cost: 2,
       effects: [
-        { timing: 'on_play', condition: { actorBoardHas: { theme: '심연', min: 1 } }, action: { kind: 'damage_unit', target: 'enemy_front', value: 2 } },
-        { timing: 'on_play', condition: { actorBoardHas: { theme: '심연', min: 2 } }, action: { kind: 'damage_agent', target: 'opponent', value: 1 } }
+        { timing: 'on_play', condition: { actorBoardHas: { theme: '심연', min: 1 } }, action: { kind: 'deal_damage_to_unit', target: 'enemy_front', value: 2 } },
+        { timing: 'on_play', condition: { actorBoardHas: { theme: '심연', min: 2 } }, action: { kind: 'deal_damage_to_agent', target: 'opponent', value: 1 } }
       ]
     },
     tactical_volley: {
@@ -288,8 +288,8 @@
       spellKind: 'normal',
       cost: 4,
       effects: [
-        { timing: 'on_play', action: { kind: 'damage_unit', target: 'enemy_front', value: 3 } },
-        { timing: 'on_play', action: { kind: 'damage_agent', target: 'opponent', value: 1 } }
+        { timing: 'on_play', action: { kind: 'deal_damage_to_unit', target: 'enemy_front', value: 3 } },
+        { timing: 'on_play', action: { kind: 'deal_damage_to_agent', target: 'opponent', value: 1 } }
       ]
     }
 
@@ -299,7 +299,7 @@
     war_engine: { cost: 4, atk: 7, hp: 7 },
     direct_hit: {
       effects: [
-        { timing: 'on_play', action: { kind: 'push_stack', effectKey: 'direct_hit', stackAction: { kind: 'damage_agent', target: 'opponent', value: 3 } } }
+        { timing: 'on_play', action: { kind: 'enqueue_stack', effectKey: 'direct_hit', stackAction: { kind: 'deal_damage_to_agent', target: 'opponent', value: 3 } } }
       ]
     }
   };
@@ -368,9 +368,9 @@
     const value = Number(action.value || 0);
 
     switch (action.kind) {
-      case 'heal_self_unit':
+      case 'heal_self':
         return `${TERMS.heal}: 체력 ${value || 1} 회복`;
-      case 'search_to_hand': {
+      case 'search_deck_to_hand': {
         const f = action?.filter || {};
         const chunks = [];
         if (f.race) chunks.push(`${f.race}`);
@@ -380,24 +380,24 @@
         const label = chunks.length ? chunks.join(' · ') : '카드';
         return `${TERMS.search}: 덱에서 ${label} ${count}장을 찾아 손패에 넣고 덱을 섞는다`;
       }
-      case 'recruit_from_deck':
+      case 'deploy_from_deck':
         return `${TERMS.recruit}: 덱에서 유닛 ${count}장을 곧바로 ${TERMS.recruit}하고 덱을 섞는다`;
       case 'gain_mana':
         return `${TERMS.overcharge}: 즉시 마나 ${value || 0} 획득`;
-      case 'push_stack': {
+      case 'enqueue_stack': {
         const stackAction = action?.stackAction || STACK_EFFECT_DEFAULTS[action?.effectKey] || null;
-        if (stackAction?.kind === 'damage_agent') {
+        if (stackAction?.kind === 'deal_damage_to_agent') {
           return `${TERMS.chain}: 스택 해결 시 상대 에이전트에게 ${Number(stackAction.value || 0)} 피해`;
         }
         return `${TERMS.chain}: 스택에 올린 뒤 해결`;
       }
-      case 'damage_unit':
+      case 'deal_damage_to_unit':
         return `${TERMS.pressure}: 대상 유닛에게 ${value || 0} 피해`;
       case 'heal_unit':
         return `${TERMS.targeting}/${TERMS.heal}: 아군 유닛 체력 ${value || 0} 회복`;
-      case 'damage_agent':
+      case 'deal_damage_to_agent':
         return `${TERMS.pressure}: 상대 에이전트에게 ${value || 0} 피해`;
-      case 'attach_equip': {
+      case 'attach_equipment': {
         const atk = Number(action?.bonus?.atk || 0);
         const hp = Number(action?.bonus?.hp || 0);
         return `${TERMS.equip}: 아군 유닛에 ${TERMS.equip}해 공격 ${atk >= 0 ? '+' : ''}${atk}, 체력 ${hp >= 0 ? '+' : ''}${hp}`;

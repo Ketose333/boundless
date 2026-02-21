@@ -175,9 +175,9 @@ function runEffectAction(state, actorId, cardKey, action, context = {}) {
   const oppId = Object.keys(state.agents).find((id) => id !== actorId);
 
   switch (action.kind) {
-    case 'heal_self_unit':
+    case 'heal_self':
     case 'heal_unit': {
-      const unitId = action.kind === 'heal_self_unit'
+      const unitId = action.kind === 'heal_self'
         ? context?.unitId
         : resolveUnitTarget(state, actorId, action, context);
       if (!unitId || !state.units[unitId]) return;
@@ -187,7 +187,7 @@ function runEffectAction(state, actorId, cardKey, action, context = {}) {
       state.log.push(`${actorId} healed ${cardLabel(cardKey)} by ${v}`);
       return;
     }
-    case 'search_to_hand': {
+    case 'search_deck_to_hand': {
       const wanted = action?.filter?.type;
       const label = action?.label || wanted || 'card';
       const count = Math.max(1, Number(action.count || 1));
@@ -197,7 +197,7 @@ function runEffectAction(state, actorId, cardKey, action, context = {}) {
       }
       return;
     }
-    case 'recruit_from_deck': {
+    case 'deploy_from_deck': {
       const count = Math.max(1, Number(action.count || 1));
       for (let i = 0; i < count; i++) {
         const ok = recruitOneFromDeck(state, actorId);
@@ -212,7 +212,7 @@ function runEffectAction(state, actorId, cardKey, action, context = {}) {
       state.log.push(`${actorId} gained temporary mana +${v}`);
       return;
     }
-    case 'push_stack': {
+    case 'enqueue_stack': {
       const effectKey = action.effectKey || 'unknown';
       const stackAction = action.stackAction || getStackDefaultAction(effectKey);
       if (!stackAction) {
@@ -222,7 +222,7 @@ function runEffectAction(state, actorId, cardKey, action, context = {}) {
       state.stack.push({ id: `stk_${Date.now()}`, actorId, sourceCardKey: cardKey, effectKey, payload: { action: stackAction } });
       return;
     }
-    case 'damage_agent': {
+    case 'deal_damage_to_agent': {
       const target = (action.target === 'self' || action.target === 'self_agent') ? actorId : oppId;
       const v = Number(action.value || 0);
       if (!target || v <= 0) return;
@@ -231,7 +231,7 @@ function runEffectAction(state, actorId, cardKey, action, context = {}) {
       state.log.push(`${actorId} dealt ${v} damage to ${target}`);
       return;
     }
-    case 'damage_unit': {
+    case 'deal_damage_to_unit': {
       const unitId = resolveUnitTarget(state, actorId, action, context);
       const v = Number(action.value || 0);
       if (!unitId || !state.units[unitId] || v <= 0) return;
@@ -246,7 +246,7 @@ function runEffectAction(state, actorId, cardKey, action, context = {}) {
       }
       return;
     }
-    case 'attach_equip': {
+    case 'attach_equipment': {
       const unitId = resolveUnitTarget(state, actorId, action, context);
       if (!unitId || !state.units[unitId]) {
         state.log.push(`${actorId} equip failed (no target unit)`);
