@@ -425,6 +425,14 @@
       .trim();
   }
 
+  function normalizeKeywordToken(raw = '') {
+    const token = String(raw || '')
+      .split(':')[0]
+      .replace(/\s*·\s*마나\s*\d+$/i, '')
+      .trim();
+    return token;
+  }
+
   function cardKeywords(def = {}) {
     const out = new Set();
     const raw = String(def?.effect || '');
@@ -433,7 +441,7 @@
     while ((m = regex.exec(raw)) !== null) {
       const src = String(m[1] || '');
       for (const part of src.split('/')) {
-        const token = String(part || '').split(':')[0].trim();
+        const token = normalizeKeywordToken(part);
         if (token) out.add(token);
       }
     }

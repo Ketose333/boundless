@@ -43,6 +43,28 @@
     return a.localeCompare(b);
   }
 
+  function normalizeKeywordToken(raw = '') {
+    return String(raw || '')
+      .split(':')[0]
+      .replace(/\s*·\s*마나\s*\d+$/i, '')
+      .trim();
+  }
+
+  function extractEffectKeywords(effectText = '') {
+    const out = new Set();
+    const raw = String(effectText || '');
+    const regex = /<([^>]+)>/g;
+    let m;
+    while ((m = regex.exec(raw)) !== null) {
+      const src = String(m[1] || '');
+      for (const part of src.split('/')) {
+        const token = normalizeKeywordToken(part);
+        if (token) out.add(token);
+      }
+    }
+    return out;
+  }
+
   function summarizeDeck(code) {
     if (!CODEC || typeof CODEC.decodeDeckCode !== 'function') return null;
     const parsed = CODEC.decodeDeckCode(code || '');
@@ -50,24 +72,14 @@
 
     const count = new Map();
     const effectCount = new Map();
-    const effectMap = [
-      { k: '피해', re: /(피해|공격|직격|사격|폭파)/ },
-      { k: '회복', re: /(회복|치유|수복)/ },
-      { k: '서치', re: /(덱.*가져|탐색|서치)/ },
-      { k: '전개', re: /(전개|소환|배치)/ },
-      { k: '마나', re: /(마나|코스트|충전)/ },
-      { k: '보호', re: /(수호|방어|보호)/ },
-      { k: '장착', re: /(장착|부착)/ },
-      { k: '연쇄', re: /(연쇄|스택|체인)/ }
-    ];
 
     for (const raw of parsed.deck) {
       const key = normalize(raw);
       count.set(key, (count.get(key) || 0) + 1);
       const d = defs[key] || {};
-      const txt = String(d.effect || '').toLowerCase();
-      for (const em of effectMap) {
-        if (em.re.test(txt)) effectCount.set(em.k, (effectCount.get(em.k) || 0) + 1);
+      const kwSet = extractEffectKeywords(d.effect || '');
+      for (const kw of kwSet) {
+        effectCount.set(kw, (effectCount.get(kw) || 0) + 1);
       }
     }
 
