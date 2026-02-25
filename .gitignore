@@ -1,0 +1,7 @@
+.vercel
+.env
+.env.*
+vercel/.vercel/
+vercel/node_modules/
+
+utility/

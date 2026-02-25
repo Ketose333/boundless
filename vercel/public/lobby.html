@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+    <meta name="build-rev" content="theme-sync-20260222b" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NULSIGHT — Lobby</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/header-footer.css" />
+  <link rel="stylesheet" href="/lobby.css" />
+</head>
+
+<body>
+  <div id="site-header"></div>
+
+  <main class="wrap lobby-wrap" role="main">
+    <section class="view active" aria-label="대기실">
+      <div class="lobby-grid">
+        <div class="lobby-left">
+          <article class="panel lobby-hero">
+            <header class="hero-head">
+              <h1 class="ui-page-title">빠른 시작</h1>
+            </header>
+
+            <div class="hero-grid">
+              <section class="slab">
+                <div class="slab-title">에이전트</div>
+                <div class="slab-body">
+                  <label class="sr-only" for="playerId">에이전트 이름</label>
+                  <input id="playerId" value="" placeholder="에이전트 이름" readonly aria-readonly="true" />
+                </div>
+              </section>
+
+              <section class="slab">
+                <div class="slab-title">방 만들기</div>
+                <div class="slab-body">
+                  <button type="button" class="primary w100" onclick="createRoom()">방 만들기</button>
+                </div>
+              </section>
+
+              <section class="slab slab-wide">
+                <div class="slab-title">방 코드로 합류</div>
+                <div class="slab-body">
+                  <label class="sr-only" for="roomId">방 코드</label>
+                  <div class="field-row">
+                    <input id="roomId" placeholder="방 코드를 입력해 주세요" inputmode="text" autocapitalize="none" spellcheck="false"
+                      autocomplete="off" maxlength="6" aria-describedby="roomHelp" />
+                    <button type="button" class="ghost" onclick="checkRoom()">방 상태</button>
+                    <button type="button" class="ghost" onclick="joinRoom()">입장</button>
+                  </div>
+                  <div class="field-row retry-row">
+                    <button type="button" class="ghost" onclick="retryCheck()">상태 재시도</button>
+                    <button type="button" class="ghost" onclick="retryJoin()">입장 재시도</button>
+                  </div>
+                  <div class="sr-only" id="roomHelp">입장 전에 방 상태를 확인할 수 있어요.</div>
+
+                  <div class="divider" aria-hidden="true"></div>
+                  <div class="row">
+                    <button type="button" class="ghost" onclick="goDeck()">덱빌딩</button>
+                    <button type="button" class="ghost" onclick="location.href='/guide.html'">가이드</button>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </article>
+
+          <article class="panel lobby-guide">
+            <h2 class="t-section guide-title">진행 순서</h2>
+            <div class="guide-steps">
+              <div class="step">
+                <div class="step-k" aria-hidden="true">1</div>
+                <div class="step-v">
+                  <div class="step-t">방 만들기 / 코드 입력</div>
+                  <div class="muted">상대와 같은 코드를 입력해 같은 방에 입장해 주세요.</div>
+                </div>
+              </div>
+              <div class="step">
+                <div class="step-k" aria-hidden="true">2</div>
+                <div class="step-v">
+                  <div class="step-t">덱 확인</div>
+                  <div class="muted">필요하면 덱빌딩에서 수정한 뒤 다시 돌아오면 돼요.</div>
+                </div>
+              </div>
+              <div class="step">
+                <div class="step-k" aria-hidden="true">3</div>
+                <div class="step-v">
+                  <div class="step-t">게임 시작</div>
+                  <div class="muted">입장이 완료되면 인게임으로 자동 이동해요.</div>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <aside class="lobby-right">
+          <article class="panel lobby-room" aria-label="방 상태 패널">
+            <div class="room-head">
+              <h2 class="t-section room-title">방 상태</h2>
+              <div id="roomStatus" class="pill">대기 중</div>
+            </div>
+
+            <div class="room-code-wrap">
+              <div class="muted mb6">방 코드</div>
+              <div id="roomCode" class="code code-big" aria-label="방 코드">------</div>
+            </div>
+
+            <div class="room-kv" aria-label="방 정보">
+              <div class="kv"><div class="kv-k">참가자</div><div class="kv-v" id="roomPlayers">참가자: -</div></div>
+              <div class="kv"><div class="kv-k">방장</div><div class="kv-v" id="roomOwner">방장: -</div></div>
+              <div class="kv"><div class="kv-k">매치</div><div class="kv-v" id="roomGame">매치: -</div></div>
+            </div>
+          </article>
+
+          <article class="panel lobby-ambient" aria-label="실시간 상태">
+            <h3 class="t-section ambient-title">실시간 상태</h3>
+            <div class="ambient-grid">
+              <div class="mini"><div class="mini-k">내 상태</div><div class="mini-v" id="liveAuth">-</div></div>
+              <div class="mini"><div class="mini-k">방 상태</div><div class="mini-v" id="liveRoom">-</div></div>
+              <div class="mini"><div class="mini-k">참가 인원</div><div class="mini-v" id="liveAgents">0/2</div></div>
+              <div class="mini"><div class="mini-k">입장 가능</div><div class="mini-v" id="liveJoinable">-</div></div>
+            </div>
+          </article>
+        </aside>
+      </div>
+
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script defer src="/js/layout.js"></script>
+  <script defer src="/js/termbook.js"></script>
+  <script defer src="/js/rules-const.js"></script>
+  <script defer src="/js/lobby.js"></script>
+</body>
+
+</html>

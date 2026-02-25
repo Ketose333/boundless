@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+    <meta name="build-rev" content="theme-sync-20260222b" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NULSIGHT — Deck</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/header-footer.css" />
+  <link rel="stylesheet" href="/deck.css" />
+</head>
+
+<body>
+  <div id="site-header"></div>
+
+  <main class="wrap deck-wrap" role="main">
+    <section class="view active" aria-label="덱빌딩 화면">
+      <section class="panel row deck-toolbar" aria-label="덱 조작">
+        <div class="deck-toolbar__left">
+          <label class="sr-only" for="agentId">에이전트 이름</label>
+          <input id="agentId" class="deck-agent" placeholder="에이전트 이름" readonly aria-readonly="true" autocomplete="off" />
+          <select id="deckSlot" class="deck-agent" aria-label="덱 슬롯"></select>
+          <button type="button" class="ghost" onclick="createSlot()">슬롯 추가</button>
+          <button type="button" class="ghost" onclick="deleteSlot()">슬롯 삭제</button>
+          <button type="button" class="ghost" onclick="loadDeck()">불러오기</button>
+          <button type="button" class="primary" onclick="saveDeck()">저장</button>
+        </div>
+
+        <div class="deck-toolbar__right">
+          <button type="button" class="ghost" onclick="location.href='/deck-hub.html'">덱 허브</button>
+          <button type="button" class="ghost" onclick="goLobby()">대기실</button>
+          <div class="deck-stat" id="deckStat" role="status" aria-live="polite" aria-label="현재 덱 카드 수">0장</div>
+        </div>
+      </section>
+
+      <section class="panel deck-share" aria-label="덱 코드 공유">
+        <div class="deck-share__head">
+          <h2 class="t-section deck-pane-title">덱 레시피 코드</h2>
+          <div class="deck-pane-hint">코드 생성/붙여넣기로 덱을 공유할 수 있어요.</div>
+        </div>
+        <textarea id="deckCode" class="deck-code" rows="3" placeholder="덱 코드를 입력하거나 생성해 주세요." autocomplete="off"></textarea>
+        <div class="deck-share__actions">
+          <button type="button" class="ghost" onclick="exportDeckCode()">코드 생성</button>
+          <button type="button" class="primary" onclick="importDeckCode()">코드 적용</button>
+        </div>
+      </section>
+
+      <div class="deck-grid" aria-label="카드 목록">
+        <article class="panel deck-panel">
+          <header class="deck-pane-head">
+            <h1 class="t-section deck-pane-title">카드 풀</h1>
+            <div class="deck-pane-hint">카드를 선택해 덱에 추가할 수 있어요.</div>
+          </header>
+
+          <div id="poolFilters" class="pool-filters" aria-label="카드 풀 필터"></div>
+          <div class="pool-pager" aria-label="카드 풀 페이지 이동">
+            <button type="button" class="ghost" onclick="prevPoolPage()">이전</button>
+            <span id="poolPageInfo" class="muted">1 / 1</span>
+            <button type="button" class="ghost" onclick="nextPoolPage()">다음</button>
+          </div>
+          <div id="pool" aria-label="카드 풀 목록"></div>
+        </article>
+
+        <article class="panel deck-panel">
+          <header class="deck-pane-head">
+            <h2 class="t-section deck-pane-title">현재 덱</h2>
+            <div class="deck-pane-hint">구성을 확인한 뒤 저장해 주세요.</div>
+          </header>
+          <div id="deck" aria-label="현재 덱 목록"></div>
+        </article>
+      </div>
+
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script defer src="/js/layout.js"></script>
+  <script defer src="/js/termbook.js"></script>
+  <script defer src="/js/rules-const.js"></script>
+  <script defer src="/js/shared-cards.js"></script>
+  <script defer src="/js/deck-codec.js"></script>
+  <script defer src="/js/deck.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,62 @@
+/* login.css */
+
+.narrow-640 {
+    max-width: 640px;
+}
+
+.auth-layout {
+    position: relative;
+    min-height: calc(100dvh - 170px);
+    display: grid;
+    align-items: center;
+}
+
+.auth-card {
+    width: 100%;
+    margin: 0 auto;
+    border: 1px solid var(--c-line-soft);
+    background: linear-gradient(180deg, var(--c-surface-1), var(--c-surface-1));
+}
+
+.auth-card__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: var(--sp-5);
+    margin-bottom: 10px;
+}
+
+.auth-card__title {
+    color: var(--c-text-strong);
+}
+
+.auth-form {
+    display: grid;
+    gap: var(--sp-4);
+    margin-top: 10px;
+}
+
+.auth-form input {
+    background: var(--c-surface-1);
+}
+
+.auth-actions {
+    margin-top: 10px;
+    display: grid;
+    gap: var(--sp-5);
+}
+
+.auth-actions .ghost {
+    background: var(--c-btn-ghost-bg);
+}
+
+.auth-help {
+    margin-top: 10px;
+}
+
+/* link emphasis inside muted text */
+.muted a {
+    color: var(--c-text-strong);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}

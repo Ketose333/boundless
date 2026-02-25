@@ -1,0 +1,162 @@
+/* header-footer.css */
+
+.bp-header,
+.bp-footer {
+  backdrop-filter: none;
+}
+
+/* Header: brand + auth only */
+.bp-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  border-bottom: 2px solid var(--c-ink-border);
+  background: linear-gradient(180deg, var(--c-deep-panel-92), var(--c-page-base));
+  box-shadow: 0 2px 0 var(--c-black-90);
+}
+
+.bp-header__inner,
+.bp-footer__inner {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-6);
+}
+
+/* Brand */
+.bp-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-5);
+  color: var(--c-text);
+  text-decoration: none;
+  font-weight: 1000;
+  letter-spacing: 0.2px;
+  border-radius: var(--r-sm);
+  /* for focus ring */
+  padding: 4px 6px;
+  /* comfortable click target */
+}
+
+.bp-logo {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+  line-height: 0.95;
+  letter-spacing: 0.8px;
+  font-size: 22px;
+  font-family: "Oxanium", "Pretendard", sans-serif;
+}
+
+.bp-logo span {
+  display: block;
+  font-weight: 1000;
+  font-size: var(--fs-min-readable);
+}
+
+.bp-brand:hover {
+  color: var(--c-text-strong);
+}
+
+.bp-brand:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+/* removed brand accent square */
+
+/* Actions container (auth button only) */
+.bp-header__actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  min-width: 98px;
+  min-height: 40px;
+}
+
+/* Auth button */
+.bp-header-btn {
+  color: var(--btn-accent-color);
+  text-decoration: none;
+  font-size: var(--fs-min-readable);
+  font-weight: 900;
+  padding: 7px 12px;
+  border-radius: var(--r-sm);
+  border: 1px solid var(--btn-accent-border);
+  background: var(--btn-accent-bg);
+  box-shadow: var(--c-shadow-2);
+  cursor: pointer;
+  transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+  min-height: 40px;
+  min-width: 98px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bp-header-btn:hover {
+  transform: translateY(-1px);
+  border-color: var(--c-accent-blue-glow-strong);
+}
+
+.bp-header-btn:active {
+  transform: none;
+}
+
+.bp-header-btn:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+/* Footer */
+.bp-footer {
+  margin-top: 16px;
+  border-top: 2px solid var(--c-ink-border);
+  background: linear-gradient(180deg, var(--c-deep-panel-92), var(--c-page-base));
+}
+
+.bp-footer__inner {
+  justify-content: center;
+  color: var(--c-text-soft);
+  font-size: var(--fs-min-readable);
+}
+
+.bp-footer__dot {
+  opacity: 0.7;
+}
+
+@media (max-width: 768px) {
+
+  .bp-header__inner,
+  .bp-footer__inner {
+    padding: 8px 10px;
+  }
+
+  .bp-header__actions {
+    min-width: 80px;
+  }
+
+  .bp-header-btn {
+    font-size: var(--fs-min-readable);
+    padding: 7px 10px;
+  }
+}
+
+@media (max-width: 560px) {
+  .bp-brand {
+    font-size: var(--fs-min-readable);
+  }
+
+  .bp-logo {
+    font-size: 18px;
+    letter-spacing: 0.5px;
+  }
+
+  .bp-footer__inner {
+    font-size: var(--fs-min-readable);
+  }
+}

@@ -1,0 +1,166 @@
+/* guide.css */
+
+.guide-wrap {
+    position: relative;
+    padding-top: 10px;
+}
+
+/* signature moment: desktop에서 TOC 고정 + 콘텐츠 비대칭 배치 */
+.stack {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--sp-6);
+    margin-top: 6px;
+}
+
+.guide-hero {
+    border: 1px solid var(--c-line-soft);
+    background:
+        linear-gradient(165deg, var(--c-surface-1) 0%, var(--c-surface-1) 100%);
+    box-shadow: var(--shadow2);
+}
+
+.guide-hero__grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--sp-5);
+}
+
+.guide-kpi {
+    border: 1px solid var(--c-border-strong);
+    border-radius: var(--radius);
+    background: var(--c-surface-1);
+    padding: var(--sp-6);
+}
+
+.guide-kpi__k {
+    font-size: var(--fs-body);
+    color: var(--c-text-soft);
+    margin-bottom: 6px;
+}
+
+.guide-kpi__v {
+    font-size: var(--fs-h2);
+    font-weight: 900;
+    color: var(--c-text-strong);
+}
+
+.guide-card,
+.guide-toc {
+    border: 1px solid var(--c-line-soft);
+    background: var(--c-surface-1);
+    box-shadow: var(--shadow2);
+}
+
+.guide-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.guide-card::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 3px;
+    background: linear-gradient(180deg, var(--p-accent-blue-soft), var(--p-accent-blue));
+    opacity: 0.9;
+}
+
+.guide-card__title {
+    font-size: var(--fs-h2);
+    font-weight: 900;
+    margin-bottom: 10px;
+    color: var(--c-text-strong);
+}
+
+.toc-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--sp-4);
+}
+
+.toc-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--sp-6);
+    border-radius: calc(var(--r-sm) + 2px);
+    border: 1px solid var(--c-border-strong);
+    background: var(--c-surface-1);
+    text-decoration: none;
+    color: var(--c-text-strong);
+    font-size: var(--fs-body);
+    font-weight: 800;
+}
+
+.toc-link:hover {
+    border-color: var(--c-accent-blue-glow-strong);
+    transform: translateY(-1px);
+}
+
+.toc-link:focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 2px;
+}
+
+.guide-bullets {
+    display: grid;
+    gap: var(--sp-4);
+}
+
+.bullet {
+    display: grid;
+    grid-template-columns: 10px 1fr;
+    gap: var(--sp-5);
+    align-items: start;
+}
+
+.bullet-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 4px;
+    margin-top: 7px;
+    background: var(--p-accent-blue);
+    border: 1px solid var(--c-ink-border);
+}
+
+.guide-card .muted {
+    font-size: var(--fs-body);
+    color: var(--c-text);
+    opacity: 0.95;
+}
+
+.code-token {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 999px;
+    border: 1px solid var(--c-ink-border);
+    background: var(--c-surface-1);
+    color: var(--c-text-strong);
+    font-family: var(--font-body);
+    font-size: var(--fs-body);
+    line-height: 1.35;
+}
+
+@media (min-width: 1100px) {
+    .stack {
+        grid-template-columns: 1fr;
+        gap: var(--sp-7);
+    }
+
+    .guide-toc {
+        position: static;
+    }
+}
+
+@media (max-width: 980px) {
+    .guide-hero__grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .toc-grid {
+        grid-template-columns: 1fr;
+    }
+}

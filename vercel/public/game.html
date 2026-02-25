@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+    <meta name="build-rev" content="theme-sync-20260222b" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>NULSIGHT — Game</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/header-footer.css" />
+  <link rel="stylesheet" href="/game.css" />
+</head>
+
+<body>
+  <div id="site-header"></div>
+
+  <main class="wrap game-wrap" role="main">
+
+    <section class="hud" aria-label="전황 정보">
+      <div class="hud-main">
+        <div id="turnBanner" class="hud-turn">턴 정보 불러오는 중</div>
+        <div id="phaseBadge" class="hud-phase">-</div>
+      </div>
+      <div class="hud-sub">
+        <div id="focusChip" class="hud-focus">선택 없음</div>
+        <div id="metaBadges" class="hud-meta"></div>
+      </div>
+      <div id="selectedInfo" class="hud-notice">선택: 없음</div>
+    </section>
+
+    <section class="board" aria-label="필드">
+      <article class="zone-block opp">
+        <h2 class="zone-title">상대</h2>
+        <div class="field-matrix">
+          <div class="field-main">
+            <div class="zone-row"><div id="oppMon" class="slots monster"></div></div>
+            <div class="zone-row"><div id="oppSpell" class="slots spell"></div></div>
+          </div>
+          <div class="field-side">
+            <button id="oppGrave" class="utility-zone" type="button" onclick="openGrave('opp')">무덤 0</button>
+            <button id="oppDeck" class="utility-zone" type="button">덱 0</button>
+          </div>
+        </div>
+        <div class="zone-footer">
+          <div id="oppSide" class="side"></div>
+          <button id="oppAttackPanel" class="attack-agent btn-accent" onclick="attackOpponentAgent()">본체 공격</button>
+        </div>
+      </article>
+
+      <section class="panel game-toolbar inboard" aria-label="게임 조작">
+        <button type="button" id="btnConcede" class="ghost" onclick="concedeAndExit()">항복</button>
+        <button type="button" id="btnStack" class="ghost" onclick="act('priority_pass')">우선권 패스</button>
+        <button type="button" id="btnEnd" class="primary" onclick="act('end_phase')">Phase 진행</button>
+      </section>
+
+      <article class="zone-block me">
+        <h2 class="zone-title">내 필드</h2>
+        <div class="field-matrix">
+          <div class="field-main">
+            <div class="zone-row"><div id="myMon" class="slots monster"></div></div>
+            <div class="zone-row"><div id="mySpell" class="slots spell"></div></div>
+          </div>
+          <div class="field-side">
+            <button id="myGrave" class="utility-zone" type="button" onclick="openGrave('me')">무덤 0</button>
+            <button id="myDeck" class="utility-zone" type="button">덱 0</button>
+          </div>
+        </div>
+        <div class="zone-footer">
+          <div id="mySide" class="side"></div>
+        </div>
+      </article>
+    </section>
+
+    <section class="hand-wrap" aria-label="손패">
+      <div id="hand" class="hand"></div>
+    </section>
+
+  </main>
+
+  <div id="gameEndOverlay" class="game-end-overlay hidden">
+    <div class="game-end-box">
+      <div id="gameEndText">게임 종료</div>
+      <button class="btn-accent" onclick="goLobby(true)">대기실로 이동</button>
+    </div>
+  </div>
+
+  <aside id="graveDrawer" class="grave-drawer hidden" aria-label="무덤 카드 목록">
+    <div class="grave-drawer__head">
+      <strong id="graveDrawerTitle">무덤</strong>
+      <button type="button" class="ghost" onclick="closeGrave()">닫기</button>
+    </div>
+    <div id="graveList" class="grave-drawer__list"></div>
+  </aside>
+
+  <section id="cardInspectOverlay" class="card-overlay hidden" aria-label="카드 상세 정보" aria-modal="true" role="dialog">
+    <div class="card-overlay__backdrop" onclick="closeCardOverlay()"></div>
+    <article class="card-overlay__panel">
+      <header class="card-overlay__head">
+        <strong>카드 정보</strong>
+        <button type="button" class="ghost" onclick="closeCardOverlay()">닫기</button>
+      </header>
+      <div class="card-overlay__content">
+        <div id="cardOverlayPreview" class="card-overlay__preview"></div>
+        <div class="card-overlay__body">
+          <div id="cardOverlayMeta" class="card-overlay__meta"></div>
+          <div>
+            <h3 class="card-overlay__sub">키워드 설명</h3>
+            <div id="cardOverlayKeywords" class="card-overlay__keywords"></div>
+          </div>
+        </div>
+      </div>
+    </article>
+  </section>
+
+
+
+  <section id="effectPickOverlay" class="card-overlay hidden" aria-label="효과 카드 선택" aria-modal="true" role="dialog">
+    <div class="card-overlay__backdrop" onclick="closeEffectPickOverlay(false)"></div>
+    <article class="card-overlay__panel effect-pick-overlay__panel">
+      <header class="card-overlay__head">
+        <strong id="effectPickTitle">효과 카드 선택</strong>
+        <button type="button" class="ghost" onclick="closeEffectPickOverlay(false)">취소</button>
+      </header>
+      <p id="effectPickGuide" class="muted effect-pick-overlay__guide">카드를 눌러 선택해줘.</p>
+      <div id="effectPickList" class="effect-pick-overlay__list"></div>
+    </article>
+  </section>
+
+  <div id="site-footer"></div>
+
+  <script defer src="/js/layout.js"></script>
+  <script defer src="/js/termbook.js"></script>
+  <script defer src="/js/rules-const.js"></script>
+  <script defer src="/js/shared-cards.js"></script>
+  <script defer src="/js/card-render.js"></script>
+  <script defer src="/js/game.js"></script>
+</body>
+
+</html>

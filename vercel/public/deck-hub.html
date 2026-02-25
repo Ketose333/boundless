@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta name="build-rev" content="theme-sync-20260222b" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NULSIGHT — Deck Hub</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/header-footer.css" />
+  <link rel="stylesheet" href="/deck-hub.css" />
+</head>
+<body>
+  <div id="site-header"></div>
+  <main class="wrap hub-wrap" role="main">
+    <section class="panel hub-toolbar" aria-label="덱 허브 검색">
+      <div class="hub-toolbar__row">
+        <label class="sr-only" for="hubQ">검색어</label>
+        <input id="hubQ" name="hubQ" autocomplete="off" placeholder="덱명/작성자/태그 검색" />
+        <label class="sr-only" for="hubSort">정렬</label>
+        <select id="hubSort" name="hubSort" aria-label="정렬 기준">
+          <option value="latest">최신순</option>
+          
+          <option value="imports">가져오기순</option>
+        </select>
+        <button class="ghost" onclick="refreshHub()">검색</button>
+      </div>
+      <div id="hubStat" class="muted" role="status" aria-live="polite"></div>
+    </section>
+
+    <section id="hubList" class="hub-list"></section>
+    <div class="hub-loadmore-wrap">
+      <button id="hubLoadMore" class="ghost" type="button" onclick="loadMoreHub()" style="display:none">더 불러오기</button>
+    </div>
+
+    <section class="panel hub-toolbar hub-upload" aria-label="덱 업로드">
+      <div class="hub-toolbar__row">
+        <label class="sr-only" for="postTitle">덱 이름</label>
+        <input id="postTitle" name="postTitle" autocomplete="off" maxlength="60" placeholder="덱 이름 (최대 60자)" />
+        <label class="sr-only" for="postTags">태그</label>
+        <input id="postTags" name="postTags" autocomplete="off" placeholder="태그(쉼표 구분)" />
+      </div>
+      <label class="sr-only" for="postDesc">덱 설명</label>
+      <textarea id="postDesc" name="postDesc" autocomplete="off" maxlength="300" rows="2" placeholder="덱 설명 (선택, 최대 300자)"></textarea>
+      <label class="sr-only" for="postCode">덱 코드</label>
+      <textarea id="postCode" name="postCode" autocomplete="off" spellcheck="false" rows="3" placeholder="공유할 덱 코드를 붙여넣어 주세요" ></textarea>
+      <div class="hub-toolbar__row">
+        <button class="ghost" onclick="location.href='/deck.html'">내 덱으로</button>
+        <button class="primary" onclick="publishDeckPost()">허브에 올리기</button>
+      </div>
+    </section>
+  </main>
+  <div id="site-footer"></div>
+
+  <script defer src="/js/layout.js"></script>
+  <script defer src="/js/shared-cards.js"></script>
+  <script defer src="/js/deck-codec.js"></script>
+  <script defer src="/js/deck-hub.js"></script>
+</body>
+</html>

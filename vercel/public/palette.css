@@ -1,0 +1,67 @@
+/* AUTO-GENERATED from palette.oklch.css by utility/theme/build_palette.py */
+/* Single source of truth: palette.oklch.css */
+
+/* palette.css — unified blue accent system */
+:root {
+  /* core */
+  --p-bg-900: rgb(6 9 22);
+  --p-bg-980: rgb(2 4 13);
+
+  /* blue family accents */
+  --p-accent-blue: rgb(86 113 230);
+  --p-accent-blue-soft: rgb(133 160 245);
+  --p-accent-blue-strong: rgb(64 87 229);
+  --p-accent-field: rgb(78 178 194);
+
+  /* surfaces */
+  --c-surface-1: rgb(13 20 44);
+
+  --c-text: rgb(231 237 255);
+  --c-text-strong: rgb(248 250 255);
+  --c-text-soft: rgb(199 210 242 / 0.84);
+
+  /* borders */
+  --c-line-1: rgb(114 136 207 / 0.24);
+  --c-line-soft: rgb(255 255 255 / 0.08);
+  --c-border-strong: rgb(45 58 103 / 0.96);
+  --c-ink-border: rgb(8 14 34 / 0.98);
+  --c-deep-panel-92: rgb(11 16 35 / 0.96);
+  --c-black-90: rgb(0 0 0 / 0.90);
+
+  /* unified semantic tones */
+  --c-card-slot-top: rgb(32 43 81);
+  --c-card-slot-bottom: rgb(18 25 50);
+  /* card type palettes (hue-shift only from card slot base) */
+  --c-card-unit-top: rgb(0 54 65);
+  --c-card-unit-bottom: rgb(0 32 39);
+  --c-card-spell-top: rgb(51 36 75);
+  --c-card-spell-bottom: rgb(30 20 46);
+  --c-accent-hp-border: rgb(149 110 210 / 0.92);
+  --c-accent-blue-glow-strong: rgb(86 113 230 / 0.38);
+
+  --c-intro-bg: rgb(3 3 6);
+  --c-intro-muted: rgb(163 170 190);
+  --c-intro-shadow: rgb(0 0 0 / 0.45);
+  --c-intro-panel: rgb(15 21 40);
+
+  --c-accent-blue-wash-14: rgb(86 113 230 / 0.08);
+
+  --c-page-base: rgb(1 2 4);
+  --c-btn-ghost-bg: rgb(20 29 59 / 0.82);
+
+  /* glow */
+  --c-glow: rgb(93 116 199 / 0.20);
+
+  /* effects */
+  --c-shadow-1: 0 10px 22px rgb(0 0 0 / 0.24);
+  --c-shadow-2: 0 6px 14px rgb(0 0 0 / 0.18);
+  --c-focus-ring: rgb(104 128 212 / 0.44);
+  --c-focus-ring-2: rgb(99 119 182 / 0.20);
+
+  /* overlay */
+  --c-overlay-backdrop: rgb(4 6 16 / 0.72);
+  --c-overlay-blur: blur(2px);
+
+  /* buttons */
+  --c-btn-accent-bg: linear-gradient(180deg, var(--p-accent-blue-soft) 0%, var(--p-accent-blue-strong) 100%);
+}

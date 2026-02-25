@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+    <meta name="build-rev" content="theme-sync-20260222b" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NULSIGHT — Login</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/header-footer.css" />
+  <link rel="stylesheet" href="/login.css" />
+</head>
+
+<body>
+  <div id="site-header"></div>
+
+  <main class="wrap narrow-640 auth-layout">
+    <section class="panel auth-card">
+      <header class="auth-card__head">
+        <h1 class="ui-page-title auth-card__title">로그인</h1>
+        <div class="muted"></div>
+      </header>
+
+      <form class="auth-form" onsubmit="return false;">
+        <label class="sr-only" for="loginUsername">아이디</label>
+        <input id="loginUsername" class="w100" placeholder="아이디를 입력해 주세요" autocomplete="username" autocapitalize="none" spellcheck="false" />
+
+        <label class="sr-only" for="loginPassword">비밀번호</label>
+        <input id="loginPassword" type="password" class="w100" placeholder="비밀번호를 입력해 주세요" autocomplete="current-password" />
+
+        <div class="auth-actions">
+          <button type="button" class="primary w100" onclick="login()">로그인</button>
+        </div>
+      </form>
+
+      <div class="auth-help">
+        <div class="muted lh15">로그인이 되지 않으면 계정 정보를 다시 확인해 주세요.</div>
+        <div class="muted mt8">계정이 없으시면 <a href="/register.html">회원가입</a>을 이용해 주세요.</div>
+      </div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script defer src="/js/layout.js"></script>
+  <script defer src="/js/login.js"></script>
+</body>
+
+</html>

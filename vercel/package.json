@@ -1,0 +1,18 @@
+{
+  "name": "nulsight-vercel",
+  "private": true,
+  "version": "1.0.0",
+  "description": "NULSIGHT Alpha 1.0.0 Vercel deployment root",
+  "license": "UNLICENSED",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "palette:build": "python3 ../../utility/theme/build_palette.py",
+    "predeploy": "python3 ../../utility/theme/build_palette.py",
+    "deploy": "vercel --prod"
+  },
+  "dependencies": {
+    "@vercel/kv": "^1.0.1"
+  }
+}

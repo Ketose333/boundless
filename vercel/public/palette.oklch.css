@@ -1,0 +1,64 @@
+/* palette.css — unified blue accent system */
+:root {
+  /* core */
+  --p-bg-900: oklch(14.30% 0.0290 270);
+  --p-bg-980: oklch(11.00% 0.0250 270);
+
+  /* blue family accents */
+  --p-accent-blue: oklch(59% 0.178 270);
+  --p-accent-blue-soft: oklch(72% 0.128 270);
+  --p-accent-blue-strong: oklch(53% 0.215 270);
+  --p-accent-field: oklch(71% 0.095 210);
+
+  /* surfaces */
+  --c-surface-1: oklch(19.8% 0.050 270);
+
+  --c-text: oklch(94.80% 0.0240 270);
+  --c-text-strong: oklch(98.40% 0.0080 270);
+  --c-text-soft: oklch(86.50% 0.0460 270 / 0.84);
+
+  /* borders */
+  --c-line-1: oklch(64% 0.110 270 / 0.24);
+  --c-line-soft: oklch(100% 0 0 / 0.08);
+  --c-border-strong: oklch(36% 0.080 270 / 0.96);
+  --c-ink-border: oklch(17.1% 0.043 270 / 0.98);
+  --c-deep-panel-92: oklch(18.0% 0.040 270 / 0.96);
+  --c-black-90: oklch(0% 0 0 / 0.90);
+
+  /* unified semantic tones */
+  --c-card-slot-top: oklch(30% 0.070 270);
+  --c-card-slot-bottom: oklch(22% 0.050 270);
+  /* card type palettes (hue-shift only from card slot base) */
+  --c-card-unit-top: oklch(30% 0.070 210);
+  --c-card-unit-bottom: oklch(22% 0.050 210);
+  --c-card-spell-top: oklch(30% 0.070 300);
+  --c-card-spell-bottom: oklch(22% 0.050 300);
+  --c-accent-hp-border: oklch(62% 0.150 300 / 0.92);
+  --c-accent-blue-glow-strong: oklch(59% 0.178 270 / 0.38);
+
+  --c-intro-bg: oklch(10% 0.01 270);
+  --c-intro-muted: oklch(74% 0.03 270);
+  --c-intro-shadow: oklch(0% 0 0 / 0.45);
+  --c-intro-panel: oklch(20% 0.040 270);
+
+  --c-accent-blue-wash-14: oklch(59% 0.178 270 / 0.08);
+
+  --c-page-base: oklch(8% 0.015 270);
+  --c-btn-ghost-bg: oklch(24% 0.060 270 / 0.82);
+
+  /* glow */
+  --c-glow: oklch(58% 0.130 270 / 0.20);
+
+  /* effects */
+  --c-shadow-1: 0 10px 22px oklch(0% 0 0 / 0.24);
+  --c-shadow-2: 0 6px 14px oklch(0% 0 0 / 0.18);
+  --c-focus-ring: oklch(62% 0.130 270 / 0.44);
+  --c-focus-ring-2: oklch(58% 0.100 270 / 0.20);
+
+  /* overlay */
+  --c-overlay-backdrop: oklch(12.40% 0.0260 270 / 0.72);
+  --c-overlay-blur: blur(2px);
+
+  /* buttons */
+  --c-btn-accent-bg: linear-gradient(180deg, var(--p-accent-blue-soft) 0%, var(--p-accent-blue-strong) 100%);
+}

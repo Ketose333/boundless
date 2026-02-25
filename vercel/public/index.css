@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;600&display=swap');
+
+:root {
+  --index-easing: cubic-bezier(.2, .85, .2, 1);
+  --index-fast: 260ms;
+  --index-normal: 640ms;
+}
+
+body.bp-index {
+  --grid-size: 32px;
+  --grid-line: var(--c-line-soft);
+  overflow: hidden;
+  color: var(--c-text-strong);
+  font-family: "IBM Plex Sans KR", "Pretendard", sans-serif;
+  background:
+    radial-gradient(circle at 18% 14%, var(--c-intro-panel) 0%, transparent 38%),
+    radial-gradient(circle at 82% 76%, var(--c-intro-panel) 0%, transparent 40%),
+    var(--c-intro-bg);
+}
+
+.bp-index .splash {
+  background:
+    repeating-linear-gradient(0deg, var(--grid-line) 0 1px, transparent 1px var(--grid-size)),
+    repeating-linear-gradient(90deg, var(--grid-line) 0 1px, transparent 1px var(--grid-size));
+  transition: opacity var(--index-fast) ease;
+}
+
+.bp-index .stage {
+  transform: translateY(8px);
+  animation: bp-stage-in var(--index-normal) var(--index-easing) both;
+}
+
+.bp-index .logo {
+  text-shadow: 0 10px 30px var(--c-intro-shadow);
+}
+
+.bp-index .logo span:nth-child(1) {
+  animation: bp-line-reveal var(--index-normal) var(--index-easing) both;
+}
+
+.bp-index .logo span:nth-child(2) {
+  animation: bp-line-reveal var(--index-normal) var(--index-easing) 90ms both;
+}
+
+.bp-index .signature {
+  color: var(--c-intro-muted);
+  animation: bp-sig-in var(--index-normal) var(--index-easing) 180ms both;
+}
+
+.bp-index .signature::before {
+  background: linear-gradient(90deg, var(--p-accent-field), var(--p-accent-blue-strong));
+  box-shadow: 0 0 14px var(--c-accent-blue-glow-strong);
+}
+
+.bp-index .scan {
+  animation: bp-scan-sweep 1700ms var(--index-easing) 240ms both;
+}

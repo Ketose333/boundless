@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+    <meta name="build-rev" content="theme-sync-20260222b" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NULSIGHT — Register</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/header-footer.css" />
+  <link rel="stylesheet" href="/login.css" />
+</head>
+
+<body>
+  <div id="site-header"></div>
+
+  <main class="wrap narrow-640 auth-layout">
+    <section class="panel auth-card">
+      <header class="auth-card__head">
+        <h1 class="ui-page-title auth-card__title">회원가입</h1>
+        <div class="muted"></div>
+      </header>
+
+      <form class="auth-form" onsubmit="return false;">
+        <label class="sr-only" for="regUsername">아이디</label>
+        <input id="regUsername" class="w100" placeholder="아이디 (영문/숫자/_ · 3~24자)" autocomplete="username" autocapitalize="none" spellcheck="false" />
+
+        <label class="sr-only" for="regDisplayName">표시 이름 (선택)</label>
+        <input id="regDisplayName" class="w100" placeholder="표시 이름 (선택)" autocomplete="nickname" />
+
+        <label class="sr-only" for="regPassword">비밀번호</label>
+        <input id="regPassword" type="password" class="w100" placeholder="비밀번호 (영문+숫자 · 8자 이상)" autocomplete="new-password" />
+
+        <div class="auth-actions">
+          <button type="button" class="primary w100" onclick="register()">회원가입</button>
+        </div>
+      </form>
+
+      <div class="auth-help">
+        <div class="muted">이미 계정이 있으시면 <a href="/login.html">로그인</a>해 주세요.</div>
+      </div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script defer src="/js/layout.js"></script>
+  <script defer src="/js/login.js"></script>
+</body>
+
+</html>

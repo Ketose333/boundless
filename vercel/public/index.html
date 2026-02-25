@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+    <meta name="build-rev" content="theme-sync-20260222b" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NULSIGHT</title>
+    <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/index.css" />
+
+</head>
+
+<body class="bp-index">
+  <div class="splash" id="splash" aria-label="화면 전환">
+    <div class="stage">
+      <h1 class="logo" aria-label="NULSIGHT">NULSIGHT</h1>
+      <div class="signature">BOUNDLESS PROTOCOL</div>
+    </div>
+    <div class="scan" aria-hidden="true"></div>
+  </div>
+
+  <script>
+    (async () => {
+      const q = new URLSearchParams(location.search);
+      const roomId = (q.get('roomId') || '').trim();
+      let agentId = (q.get('agentId') || '').trim();
+      const splash = document.getElementById('splash');
+
+      const goLobby = () => {
+        const params = new URLSearchParams();
+        if (roomId) params.set('roomId', roomId);
+        if (agentId) params.set('agentId', agentId);
+        location.replace('/lobby.html' + (params.toString() ? `?${params}` : ''));
+      };
+
+      const goGame = () => {
+        if (!roomId || !agentId) return goLobby();
+        location.replace(`/game.html?roomId=${encodeURIComponent(roomId)}&agentId=${encodeURIComponent(agentId)}`);
+      };
+
+      const SPLASH_KEY = 'bp_intro_seen_v1';
+      const waitSplash = () => new Promise((resolve) => setTimeout(resolve, 680));
+      const fadeOut = () => {
+        splash?.classList.add('fade-out');
+        return new Promise((resolve) => setTimeout(resolve, 280));
+      };
+
+      try {
+        const meRes = await fetch('/api/auth?action=me');
+        if (!meRes.ok) {
+          await waitSplash();
+          await fadeOut();
+          sessionStorage.setItem(SPLASH_KEY, '1');
+          return location.replace('/login.html?next=' + encodeURIComponent(location.pathname + location.search));
+        }
+
+        const me = await meRes.json();
+        agentId = (me?.user?.username || agentId || '').trim();
+
+        if (!roomId) {
+          await waitSplash();
+          await fadeOut();
+          sessionStorage.setItem(SPLASH_KEY, '1');
+          return goLobby();
+        }
+
+        const r = await fetch(`/api/rooms?action=state&roomId=${encodeURIComponent(roomId)}`);
+        const data = await r.json();
+        const inGame = !!data?.game;
+        const joined = Array.isArray(data?.agents) ? data.agents.includes(agentId) : false;
+
+        await waitSplash();
+        await fadeOut();
+        sessionStorage.setItem(SPLASH_KEY, '1');
+
+        if (data?.ok && inGame && joined) return goGame();
+        return goLobby();
+      } catch {
+        await waitSplash();
+        await fadeOut();
+        sessionStorage.setItem(SPLASH_KEY, '1');
+        return goLobby();
+      }
+    })();
+  </script>
+</body>
+
+</html>

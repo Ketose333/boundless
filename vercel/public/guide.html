@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+    <meta name="build-rev" content="theme-sync-20260222b" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NULSIGHT — Guide</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/header-footer.css" />
+  <link rel="stylesheet" href="/guide.css" />
+</head>
+
+<body>
+  <div id="site-header"></div>
+
+  <main class="wrap guide-wrap" role="main">
+    <section class="view active" aria-label="게임 가이드">
+      <div class="stack">
+        <section class="panel guide-hero" aria-label="가이드 요약">
+          <div class="guide-hero__grid">
+            <div class="guide-kpi"><div class="guide-kpi__k">목표</div><div class="guide-kpi__v">상대 HP 0</div></div>
+            <div class="guide-kpi"><div class="guide-kpi__k">기본 HP</div><div class="guide-kpi__v">20</div></div>
+            <div class="guide-kpi"><div class="guide-kpi__k">구성</div><div class="guide-kpi__v">턴/페이즈</div></div>
+            <div class="guide-kpi"><div class="guide-kpi__k">조작</div><div class="guide-kpi__v">선택 → 클릭</div></div>
+          </div>
+        </section>
+
+        <nav class="panel guide-toc" aria-label="가이드 목차">
+          <div class="guide-card__title t-section">목차</div>
+          <div class="toc-grid">
+            <a class="toc-link" href="#g1">1) 턴/페이즈 (자동 진행)</a>
+            <a class="toc-link" href="#g2">2) 기본 조작</a>
+            <a class="toc-link" href="#g3">3) 키워드 문법</a>
+          </div>
+        </nav>
+        <article class="panel guide-card" id="g1">
+          <div class="guide-card__title">1) 턴/페이즈 (자동 진행)</div>
+          <div class="muted lh15"><span class="code-token">드로우</span> → <span class="code-token">메인</span> → <span class="code-token">배틀</span> → <span class="code-token">엔드</span></div>
+                    <div class="muted lh15">선공 1턴에는 배틀이 막혀 있어요.</div>
+        </article>
+        <article class="panel guide-card" id="g2">
+          <div class="guide-card__title">2) 기본 조작</div>
+          <div class="guide-bullets">
+            <div class="bullet"><span class="bullet-dot" aria-hidden="true"></span><div class="muted lh15">전개: 손패를 선택한 뒤 빈 슬롯을 클릭해요.</div></div>
+            <div class="bullet"><span class="bullet-dot" aria-hidden="true"></span><div class="muted lh15">유닛 공격: 내 유닛을 선택한 뒤 상대 유닛을 클릭해요.</div></div>
+            <div class="bullet"><span class="bullet-dot" aria-hidden="true"></span><div class="muted lh15">본체 공격: 내 유닛을 선택한 뒤 "본체 공격" 버튼을 눌러요.</div></div>
+            <div class="bullet"><span class="bullet-dot" aria-hidden="true"></span><div class="muted lh15">항복: "항복" 버튼을 누르면 즉시 패배 처리돼요.</div></div>
+          </div>
+        </article>
+        <article class="panel guide-card" id="g3"><div class="guide-card__title">3) 키워드 문법 (자동 동기화)</div><div id="keywordGuideList" class="muted lh15" role="status" aria-live="polite">키워드 불러오는 중</div></article>
+      </div>
+
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script defer src="/js/layout.js"></script>
+  <script defer src="/js/termbook.js"></script>
+  <script defer src="/js/rules-const.js"></script>
+  <script defer src="/js/shared-cards.js"></script>
+  <script defer src="/js/guide.js"></script>
+</body>
+
+</html>
