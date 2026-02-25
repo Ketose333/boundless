@@ -84,6 +84,11 @@ async function createDeckPost({ title, description, author, code, cardsCount, ta
   return post;
 }
 
+function toTimeMs(v) {
+  const t = Date.parse(String(v || ''));
+  return Number.isFinite(t) ? t : 0;
+}
+
 async function listDeckPosts({ q = '', sort = 'latest', limit = 30, offset = 0 }) {
   const refs = await getHubList();
   const ids = (Array.isArray(refs) ? refs : [])
@@ -108,9 +113,19 @@ async function listDeckPosts({ q = '', sort = 'latest', limit = 30, offset = 0 }
   }
 
   if (sort === 'imports') {
-    filtered.sort((a, b) => (b.imports - a.imports) || b.createdAt.localeCompare(a.createdAt));
+    filtered.sort((a, b) => {
+      const byImports = (Number(b.imports) || 0) - (Number(a.imports) || 0);
+      if (byImports) return byImports;
+      const byCreated = toTimeMs(b.createdAt) - toTimeMs(a.createdAt);
+      if (byCreated) return byCreated;
+      return String(b.id || '').localeCompare(String(a.id || ''));
+    });
   } else {
-    filtered.sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+    filtered.sort((a, b) => {
+      const byCreated = toTimeMs(b.createdAt) - toTimeMs(a.createdAt);
+      if (byCreated) return byCreated;
+      return String(b.id || '').localeCompare(String(a.id || ''));
+    });
   }
 
   const total = filtered.length;

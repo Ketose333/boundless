@@ -27,6 +27,22 @@
     return String(s || '').replace(/[&<>"']/g, (m) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
   }
 
+  function compareDeckOrder(aKey, bKey) {
+    const a = normalize(aKey);
+    const b = normalize(bKey);
+    const ta = String(defs[a]?.theme || '');
+    const tb = String(defs[b]?.theme || '');
+    const themeCmp = ta.localeCompare(tb, 'ko');
+    if (themeCmp !== 0) return themeCmp;
+
+    const na = String(defs[a]?.name || a);
+    const nb = String(defs[b]?.name || b);
+    const nameCmp = na.localeCompare(nb, 'ko');
+    if (nameCmp !== 0) return nameCmp;
+
+    return a.localeCompare(b);
+  }
+
   function summarizeDeck(code) {
     if (!CODEC || typeof CODEC.decodeDeckCode !== 'function') return null;
     const parsed = CODEC.decodeDeckCode(code || '');
@@ -49,7 +65,7 @@
       const key = normalize(raw);
       count.set(key, (count.get(key) || 0) + 1);
       const d = defs[key] || {};
-      const txt = String(d.effects || d.effect || '').toLowerCase();
+      const txt = String(d.effect || '').toLowerCase();
       for (const em of effectMap) {
         if (em.re.test(txt)) effectCount.set(em.k, (effectCount.get(em.k) || 0) + 1);
       }
@@ -57,11 +73,13 @@
 
     const rows = Array.from(count.entries())
       .map(([key, qty]) => ({ key, qty, name: defs[key]?.name || key }))
-      .sort((a, b) => (b.qty - a.qty) || a.name.localeCompare(b.name, 'ko'));
+      .sort((a, b) => compareDeckOrder(a.key, b.key));
 
     const effects = Array.from(effectCount.entries())
-      .sort((a, b) => b[1] - a[1])
-      .slice(0, 6);
+      .filter(([, n]) => Number(n) > 0)
+      .sort((a, b) => (b[1] - a[1]) || a[0].localeCompare(b[0], 'ko'))
+      .slice(0, 6)
+      .sort((a, b) => a[0].localeCompare(b[0], 'ko'));
 
     return { total: parsed.deck.length, kinds: rows.length, rows, effects };
   }
