@@ -11,10 +11,10 @@ OpenClaw와 분리된 TCG 코어/서버/웹 작업 폴더.
 ## 문서 구조
 
 - 룰 단일본: [`docs/rules.md`](./docs/rules.md)
-- 의사결정 기록(상위): [`../policy/engineering_decisions.md`](../policy/engineering_decisions.md)
-- 기능 QA 체크리스트(상위): [`../policy/qa_checklist.md`](../policy/qa_checklist.md)
-- CSS 아키텍처 책임표(상위): [`../policy/css_architecture.md`](../policy/css_architecture.md)
-- 배포 앱 안내(상위): [`../policy/vercel_deploy_app.md`](../policy/vercel_deploy_app.md)
+- 의사결정 기록: [`policy/engineering_decisions.md`](./policy/engineering_decisions.md)
+- 기능 QA 체크리스트: [`policy/qa_checklist.md`](./policy/qa_checklist.md)
+- CSS 아키텍처 책임표: [`policy/css_architecture.md`](./policy/css_architecture.md)
+- 배포 앱 안내: [`policy/vercel_deploy_app.md`](./policy/vercel_deploy_app.md)
 - 코어 안내: [`core/README.md`](./core/README.md)
 
 ## 현재 구현 요약 (Alpha 1.0.0)

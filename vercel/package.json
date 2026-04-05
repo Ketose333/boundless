@@ -8,8 +8,8 @@
     "node": ">=18"
   },
   "scripts": {
-    "palette:build": "python3 ../../utility/theme/build_palette.py",
-    "predeploy": "python3 ../../utility/theme/build_palette.py",
+    "palette:build": "python3 ../utility/theme/build_palette.py",
+    "predeploy": "python3 ../utility/theme/build_palette.py",
     "deploy": "vercel --prod"
   },
   "dependencies": {
